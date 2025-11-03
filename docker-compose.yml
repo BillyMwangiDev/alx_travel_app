@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: alx_travel_app_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: alx_travel_app_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${DB_PASSWORD:-}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - alx_travel_app_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  alx_travel_app_network:
+    driver: bridge
+
